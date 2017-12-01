@@ -10,13 +10,11 @@ def parse(string):
 	"""
 
 	s = 0
-	l
-	for n, c in enumerate(string[:-1]):
-		if c == string[n+1]:
+	l = len(string)
+	j = l / 2
+	for n, c in enumerate(string):
+		if c == string[(n+j) % l]:
 			s += int(c)
-
-	if string[0] == string[-1]:
-		s += int(string[0])
 
 	return s
 
