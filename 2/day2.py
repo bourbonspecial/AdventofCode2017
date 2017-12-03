@@ -23,7 +23,10 @@ def checksum(string):
 	cs = 0
 	for row in string.split('\n'):
 		vals = [int(x) for x in row.split('\t')]
-		cs += max(vals) - min(vals)
+		for i,v1 in enumerate(vals):
+			for j,v2 in enumerate(vals):
+				if not i == j and v1 % v2 == 0:
+					cs += v1 / v2
 
 	return cs
 
