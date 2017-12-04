@@ -45,7 +45,7 @@ def dist(integer):
 	return c + abs(mid - list_pos) - 1
 
 def main():
-	print dist(1024)
+	print dist(277678)
 
 if __name__ == '__main__':
 	main()
