@@ -14,9 +14,12 @@ def main():
 	while 0 <= pnt < len(stack):
 		count += 1
 		jmp = stack[pnt]
-		stack[pnt] += 1
-		pnt += jmp
 
+		if stack[pnt] >= 3:
+			stack[pnt] -= 1
+		else:
+			stack[pnt] += 1
+		pnt += jmp
 
 	print count
 
