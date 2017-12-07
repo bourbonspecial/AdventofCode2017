@@ -25,7 +25,7 @@ def main():
 			j = i % len(cur)
 			cur[j] += 1
 
-	print cnt
+	print len(states) - states.index(cur)
 
 if __name__ == '__main__':
 	main()
