@@ -9,6 +9,16 @@ class Tower(object):
 		self.supports = supports
 		# self.supports = [t for t in all_towers if t.name in supports]
 
+def weigh(tower,all_towers):
+	"""
+	Find the total weight of a tower.
+	"""
+
+	if not tower.supports:
+		return tower.weight
+
+	return sum([weigh(t,all_towers) for t in all_towers if t.name in tower.supports]) + tower.weight
+
 def main():
 	with open('in.txt') as f:
 		rows = f.read().split('\n')
@@ -25,15 +35,37 @@ def main():
 
 		all_towers.append(Tower(name, weight, supports))
 
-	counter = {t.name:0 for t in all_towers}
+	print 'Seconds'
+	seconds_names = ['twimhx', 'wfdiqkg', 'guuri', 'qwada', 'mwsivlf']
+	seconds = [t for t in all_towers if t.name in seconds_names]
 
-	for t in all_towers:
-		for s in t.supports:
-			counter[s] += 1
+	for t in seconds:
+		w = weigh(t,all_towers)
+		print t.name, w
 
-	for n in counter:
-		if counter[n] == 0:
-			print n
+	print 'thirds'
+	thirds_names = ['wfkcsb', 'qlboef', 'pkowhq']
+	thirds = [t for t in all_towers if t.name in thirds_names]
+
+	for t in thirds:
+		w = weigh(t,all_towers)
+		print t.name, w
+
+	print 'fourths'
+	thirds_names = ['zfrsmm', 'tlskukk', 'fqkbscn', 'mlafk']
+	thirds = [t for t in all_towers if t.name in thirds_names]
+
+	for t in thirds:
+		w = weigh(t,all_towers)
+		print t.name, w
+
+	print 'fifths'
+	thirds_names = ['ixoiuh', 'jdxth']
+	thirds = [t for t in all_towers if t.name in thirds_names]
+
+	for t in thirds:
+		w = weigh(t,all_towers)
+		print t.name, w
 
 if __name__ == '__main__':
 	main()
