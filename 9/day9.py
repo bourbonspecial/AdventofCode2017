@@ -2,6 +2,19 @@
 
 __author__ = 'Remus Knowles <remknowles@gmail.com>'
 
+def discard_cancelled(string):
+	"""
+	Get rid of any cancelled chars in the string.
+	"""
+
+	while '!' in string:
+		print string
+		for i, c in enumerate(string):
+			if c == '!':
+				string = string[:1] + string[i+2:]
+
+	return string
+
 def discard_garbage(string):
 	"""
 	Parese out any garbage from the strings and return only { and } chars.
@@ -15,19 +28,8 @@ def discard_garbage(string):
 			start = i
 			for j, c2 in enumerate(string[start:]):
 				if c2 == '>':
-					cancel_cnt = 0
-					
-					for el in string[::-1][-start-j:-start-1]:
-						if el == '!':
-							cancel_cnt += 1
-						else:
-							break
-
-					if cancel_cnt % 2 == 0:
-						end = start + j
-						return discard_garbage(string[:start] + string[end+1:])
-					else:
-						continue
+					end = start + j
+					return discard_garbage(string[:start] + string[end+1:])
 
 def value(string):
 	"""
@@ -50,9 +52,11 @@ def main():
 	with open('in.txt') as f:
 		txt = f.read()
 
-	# txt = '{{<!!!>>}}'
+	txt = '{{<!!!>>}}'
 
-	print value(discard_garbage(txt))
+	print discard_cancelled(txt)
+	print discard_garbage(discard_cancelled(txt))
+	print value(discard_garbage(discard_cancelled(txt)))
 
 if __name__ == '__main__':
 	main()
