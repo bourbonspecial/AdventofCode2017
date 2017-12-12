@@ -34,14 +34,12 @@ def collapse(d,k1,k2,k3):
 
 	return d
 
-def main():
-	with open('in.txt') as f:
-		txt = f.read()
-
-	directions = txt.split(',')
+def dist(directions):
+	"""
+	Calculate dist from array of directions.
+	"""
 
 	c = Counter(directions)
-	print c
 
 	c = cancel(c,'n','s')
 	c = cancel(c,'ne','sw')
@@ -50,7 +48,15 @@ def main():
 	c = collapse(c,'ne','nw','n')
 	c = collapse(c,'se','sw','s')
 
-	print c
+	return sum(c.values())
+
+def main():
+	with open('in.txt') as f:
+		txt = f.read()
+
+	directions = txt.split(',')
+
+	print max([dist(directions[:i]) for i in range(1,len(directions) + 1)])
 
 if __name__ == '__main__':
 	main()
