@@ -7,6 +7,11 @@ from operator import xor
 inp = 'oh hi there'
 
 def knot_hash(inp, rounds=64):
+	"""
+	Calculate the knot hash for the given input. 
+
+	Assumes input is ascii encoded.
+	"""
 	ls = range(256)
 	inp = [ord(c) for c in inp] + [17, 31, 73, 47, 23]
 	skip = 0
