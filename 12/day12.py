@@ -17,36 +17,17 @@ def parse():
 
 	return edges
 
-def merge_graphs(graphs,edges):
-	"""
-	Take a list of graphs and edges and do one pass of consolidation.
-	"""
-
-	new_graphs = []
-
-	for s,d in edges:
-		for g1 in graphs:
-			for g2 in graphs:
-				if not g1 == g2 and s in g1 and d in g2:
-					new_graphs.append(g1.union(g2))
-
-	for g in graphs:
-		for ng in new_graphs:
-			if g.intersect(ng):
-				break
-		else:
-			new_graphs.append(g)
-
-	return new_graphs
-
 def main():
 	edges = parse()
-	graphs = [set([x]) for x in range(2000)]
-	
-	for _ in range(1):
-		graphs = merge_graphs(graphs,edges)
+	g = set([0])
 
-	print graphs
+	for _ in xrange(10):
+		for s, d in edges:
+			if s in g or d in g:
+				g.add(s)
+				g.add(d)
+
+	print len(g)
 
 if __name__ == '__main__':
 	main()
